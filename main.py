@@ -2,12 +2,14 @@ import os
 import subprocess
 
 SCRIPTS = [
+    "scripts/0_generate_metadata.py",     # Generar título y descripción
     "scripts/1_generate_script.py",
     "scripts/2_generate_voice.py",
     "scripts/download_music.py",
     "scripts/3_generate_audio.py",
     "scripts/download_video.py",
-    "scripts/4_generate_video.py"
+    "scripts/4_generate_video.py",
+    "scripts/upload_video.py"             # Subir a YouTube
 ]
 
 def run_script(script_path):
@@ -21,4 +23,4 @@ if __name__ == "__main__":
     print("🧠 Comenzando generación automática de vídeo relajante...\n")
     for script in SCRIPTS:
         run_script(script)
-    print("\n✅ ¡Proceso completo! El vídeo final ha sido generado.\n")
+    print("\n✅ ¡Proceso completo! El vídeo final ha sido generado y subido a YouTube.\n")

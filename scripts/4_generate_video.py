@@ -2,6 +2,7 @@
 import os
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from moviepy.audio.io.AudioFileClip import AudioFileClip
+from moviepy.editor import concatenate_videoclips
 
 # Rutas
 VIDEO_PATH = "video/base.mp4"
@@ -14,18 +15,20 @@ video = VideoFileClip(VIDEO_PATH)
 print("🎧 Cargando audio final...")
 audio = AudioFileClip(AUDIO_PATH)
 
-# Ajustar duración del audio al video
-if video.duration < audio.duration:
-    print("⚠️ El audio es más largo que el vídeo. Recortando audio.")
-    audio = audio.with_duration(video.duration)
-else:
-    print("⚠️ El vídeo es más largo que el audio. Se usará sólo parte del vídeo.")
-    video = video.subclip(0, audio.duration)
+# Calcular cuántas veces hay que repetir el vídeo para cubrir el audio
+repeticiones = int(audio.duration // video.duration) + 1
+print(f"🔁 Repeticiones necesarias: {repeticiones}")
 
-# Combinar video y audio
-video = video.with_audio(audio)
+# Repetir el vídeo en bucle tipo gif
+video_loop = concatenate_videoclips([video] * repeticiones)
+
+# Recortar el vídeo al tamaño exacto del audio
+video_final = video_loop.subclip(0, audio.duration)
+
+# Asignar el audio
+video_final = video_final.set_audio(audio)
 
 # Exportar
 print("📤 Exportando vídeo final...")
-video.write_videofile(OUTPUT_PATH, codec="libx264", audio_codec="aac")
+video_final.write_videofile(OUTPUT_PATH, codec="libx264", audio_codec="aac")
 print("✅ ¡Vídeo final exportado con éxito!")

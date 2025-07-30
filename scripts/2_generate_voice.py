@@ -32,7 +32,8 @@ headers = {
 }
 body = {
     "text": texto,
-    "model_id": "eleven_monolingual_v1",
+   ## "language_code": "spa",
+    "model_id": "eleven_multilingual_v2",
     "voice_settings": {
         "stability": 0.5,
         "similarity_boost": 0.75
