@@ -60,3 +60,15 @@ El vídeo final se generará como: video/final.mp4 🎬
     💡 Interfaz gráfica (GUI) en fase beta
 
     Creado con ❤️ por alguien que quiere relajarse y automatizarlo todo.
+
+##EJECUCION
+ejecutar este comando: 
+python -m venv env
+env\Scripts\activate  
+
+Importante, se esta usando la version moviepy==1.0.3
+
+pip install --force-reinstall moviepy==1.0.3
+
+A continuacion 
+pyton main.py
